@@ -73,3 +73,67 @@ class _PatrimoniosTabState extends State<PatrimoniosTab> {
                 if (itens.isEmpty) {
                   return const Center(child: Text('Nenhum patrimônio encontrado.'));
                 }
+
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  itemCount: itens.length,
+                  itemBuilder: (context, index) {
+                    final item = itens[index];
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('${item.codigo} • ${item.serialNumber}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary, fontSize: 11)),
+                                StatusBadge(status: item.status),
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+                            Text(item.nome, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                            Text(
+                              item.professorResponsavel != null
+                                  ? 'Responsável: ${item.professorResponsavel}'
+                                  : 'Local: ${item.localizacao}',
+                              style: const TextStyle(fontSize: 12, color: AppColors.onSurfaceVariant),
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => PatrimonioHistoricoScreen(patrimonio: item))),
+                                  child: const Text('Histórico'),
+                                ),
+                                if (item.status == StatusPatrimonio.emUso)
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.surfaceContainer, foregroundColor: AppColors.primary),
+                                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => RegistrarDevolucaoScreen(patrimonio: item))),
+                                    child: const Text('Devolver'),
+                                  ),
+                                if (item.status == StatusPatrimonio.disponivel)
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white),
+                                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AtribuirPatrimonioScreen(patrimonio: item))),
+                                    child: const Text('Atribuir'),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
