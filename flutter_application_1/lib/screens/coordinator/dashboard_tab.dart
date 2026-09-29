@@ -169,3 +169,31 @@ class DashboardTab extends StatelessWidget {
       ),
     );
   }
+
+  Widget _metricCard(String title, int count, double progress, IconData icon, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(icon, color: color, size: 20),
+              Text('${(progress * 100).toInt()}%', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11)),
+            ],
+          ),
+          Text(title, style: const TextStyle(fontSize: 11, color: AppColors.onSurfaceVariant)),
+          Text('$count itens', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          LinearProgressIndicator(value: progress, color: color, backgroundColor: AppColors.surfaceContainer, minHeight: 4),
+        ],
+      ),
+    );
+  }
+}
