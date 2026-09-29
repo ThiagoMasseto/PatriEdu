@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/patrimonio.dart';
 import '../models/professor.dart';
 import '../models/movimentacao.dart';
-import '../core/theme/app_colors.dart';
 
 class MockData {
   static final MockData _instance = MockData._internal();
@@ -94,8 +93,8 @@ class MockData {
       descricao: 'Vinculado com sucesso ao docente Prof. Marcos Andrade.',
       badgeTexto: 'Mais Recente',
       icon: Icons.how_to_reg,
-      corIcone: AppColors.onSecondary,
-      corFundoIcone: AppColors.secondary,
+      corIcone: Color(0xFFFFFFFF),
+      corFundoIcone: Color(0xFF0051D5),
     ),
   ];
 
