@@ -35,3 +35,33 @@ class ApiService {
     }
     return headers;
   }
+   // POST /api/auth/login
+  Future<Map<String, dynamic>> login(String email, String password) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/auth/login'),
+      headers: _headers(requiresAuth: false),
+      body: jsonEncode({'email': email, 'password': password}),
+    );
+    final data = jsonDecode(utf8.decode(response.bodyBytes));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      if (data['token'] != null) setToken(data['token']);
+      return data;
+    } else {
+      throw Exception(data['error'] ?? 'Falha na autenticação');
+    }
+  }
+
+  // POST /api/auth/register
+  Future<Map<String, dynamic>> register(Map<String, dynamic> userData) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/auth/register'),
+      headers: _headers(requiresAuth: false),
+      body: jsonEncode(userData),
+    );
+    final data = jsonDecode(utf8.decode(response.bodyBytes));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return data;
+    } else {
+      throw Exception(data['error'] ?? 'Erro no cadastro');
+    }
+  }
