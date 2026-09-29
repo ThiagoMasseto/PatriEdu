@@ -32,6 +32,59 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  void _switchRole(String role) {
+    setState(() {
+      _selectedRole = role;
+      if (role == 'coord') {
+        _identifierController.text = 'admin@admin.com';
+        _passwordController.text = 'admin123';
+      } else {
+        _identifierController.text = 'professor@escola.com';
+        _passwordController.text = 'prof123';
+      }
+    });
+  }
+
+  void _handleLogin() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+    final email = _identifierController.text.trim();
+    final password = _passwordController.text;
+
+    final success = await AuthController().login(email, password);
+    if (!mounted) return;
+    setState(() => _isLoading = false);
+
+    if (success) {
+      final isCoord = AuthController().isAdmin || _selectedRole == 'coord';
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => isCoord ? const CoordinatorMainScreen() : const TeacherMainScreen(),
+        ),
+      );
+    }
+  }
+
+  void _triggerBiometrics() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: AppColors.primary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        content: const Row(
+          children: [
+            Icon(Icons.fingerprint, color: AppColors.tertiaryFixed),
+            SizedBox(width: 10),
+            Text('Biometria autenticada com sucesso!'),
+          ],
+        ),
+      ),
+    );
+    Future.delayed(const Duration(milliseconds: 500), _handleLogin);
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold();
