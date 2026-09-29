@@ -137,3 +137,26 @@ class _PatrimoniosTabState extends State<PatrimoniosTab> {
       ),
     );
   }
+
+  Widget _buildStatusChip(String label, String statusKey) {
+    return ListenableBuilder(
+      listenable: _controller,
+      builder: (context, _) {
+        final isSelected = _controller.selectedStatus == statusKey;
+        return ChoiceChip(
+          selected: isSelected,
+          label: Text(label),
+          selectedColor: AppColors.primary,
+          labelStyle: TextStyle(
+            color: isSelected ? Colors.white : AppColors.onSurfaceVariant,
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
+          onSelected: (val) {
+            if (val) _controller.setStatusFilter(statusKey);
+          },
+        );
+      },
+    );
+  }
+}
