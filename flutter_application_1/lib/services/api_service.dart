@@ -35,7 +35,8 @@ class ApiService {
     }
     return headers;
   }
-   // POST /api/auth/login
+
+  // POST /api/auth/login
   Future<Map<String, dynamic>> login(String email, String password) async {
     final response = await http.post(
       Uri.parse('$baseUrl/api/auth/login'),
@@ -65,3 +66,98 @@ class ApiService {
       throw Exception(data['error'] ?? 'Erro no cadastro');
     }
   }
+
+  // POST /api/admin/patrimonios
+  Future<Map<String, dynamic>> criarPatrimonio(
+    Map<String, dynamic> data,
+  ) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/admin/patrimonios'),
+      headers: _headers(),
+      body: jsonEncode(data),
+    );
+    final res = jsonDecode(utf8.decode(response.bodyBytes));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return res;
+    } else {
+      throw Exception(res['error'] ?? 'Erro ao cadastrar patrimônio');
+    }
+  }
+
+  // POST /api/admin/patrimonios/{id}/atribuir
+  Future<Map<String, dynamic>> atribuirPatrimonio(
+    dynamic id,
+    Map<String, dynamic> body,
+  ) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/admin/patrimonios/$id/atribuir'),
+      headers: _headers(),
+      body: jsonEncode(body),
+    );
+    final res = jsonDecode(utf8.decode(response.bodyBytes));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return res;
+    } else {
+      throw Exception(res['error'] ?? 'Erro ao atribuir patrimônio');
+    }
+  }
+
+  // POST /api/admin/patrimonios/{id}/desatribuir
+  Future<Map<String, dynamic>> desatribuirPatrimonio(
+    dynamic id,
+    Map<String, dynamic> body,
+  ) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/admin/patrimonios/$id/desatribuir'),
+      headers: _headers(),
+      body: jsonEncode(body),
+    );
+    final res = jsonDecode(utf8.decode(response.bodyBytes));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return res;
+    } else {
+      throw Exception(res['error'] ?? 'Erro ao registrar devolução');
+    }
+  }
+
+  // GET /api/patrimonios
+  Future<List<dynamic>> getPatrimonios() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/patrimonios'),
+      headers: _headers(),
+    );
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return jsonDecode(utf8.decode(response.bodyBytes));
+    } else {
+      throw Exception('Erro ao carregar patrimônios');
+    }
+  }
+
+  // GET /api/admin/professores
+  Future<List<dynamic>> getProfessores() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/admin/professores'),
+      headers: _headers(),
+    );
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return jsonDecode(utf8.decode(response.bodyBytes));
+    } else {
+      throw Exception('Erro ao carregar professores');
+    }
+  }
+
+  // POST /api/admin/professores
+  Future<Map<String, dynamic>> criarProfessor(Map<String, dynamic> data) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/admin/professores'),
+      headers: _headers(),
+      body: jsonEncode(data),
+    );
+    final res = jsonDecode(utf8.decode(response.bodyBytes));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return res;
+    } else {
+      throw Exception(res['error'] ?? 'Erro ao cadastrar professor');
+    }
+  }
+}
