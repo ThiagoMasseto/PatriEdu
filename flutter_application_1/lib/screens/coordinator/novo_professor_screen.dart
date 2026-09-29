@@ -33,3 +33,33 @@ class _NovoProfessorScreenState extends State<NovoProfessorScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Docente ${novo.nome} cadastrado!')));
     Navigator.pop(context);
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      appBar: AppBar(title: const Text('Cadastrar Docente'), backgroundColor: AppColors.surfaceContainerLowest),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(controller: _nomeCtrl, decoration: const InputDecoration(labelText: 'Nome Completo', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            TextField(controller: _matriculaCtrl, decoration: const InputDecoration(labelText: 'Matrícula Funcional', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            TextField(controller: _emailCtrl, decoration: const InputDecoration(labelText: 'E-mail Institucional', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            TextField(controller: _disciplinaCtrl, decoration: const InputDecoration(labelText: 'Disciplina / Área', border: OutlineInputBorder())),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white, minimumSize: const Size.fromHeight(50)),
+              onPressed: _salvar,
+              icon: const Icon(Icons.person_add),
+              label: const Text('Cadastrar Professor'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
