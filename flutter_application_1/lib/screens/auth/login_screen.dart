@@ -87,6 +87,146 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 12),
+              Center(
+                child: Column(
+                  children: [
+                    const AppLogo(size: 64, showBadge: true),
+                    const SizedBox(height: 12),
+                    Text(
+                      'PatriEdu',
+                      style: AppTextStyles.headlineLgMobile.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Gestão e Acompanhamento de Patrimônio Escolar',
+                      style: AppTextStyles.bodySm.copyWith(color: AppColors.onSurfaceVariant),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+              // Switcher Role
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: AppColors.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => _switchRole('coord'),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            color: _selectedRole == 'coord' ? AppColors.surfaceContainerLowest : Colors.transparent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.admin_panel_settings_outlined, size: 18, color: _selectedRole == 'coord' ? AppColors.primary : AppColors.onSurfaceVariant),
+                              const SizedBox(width: 6),
+                              Text('Coordenador', style: AppTextStyles.labelMd.copyWith(color: _selectedRole == 'coord' ? AppColors.primary : AppColors.onSurfaceVariant, fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => _switchRole('prof'),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            color: _selectedRole == 'prof' ? AppColors.surfaceContainerLowest : Colors.transparent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.school_outlined, size: 18, color: _selectedRole == 'prof' ? AppColors.primary : AppColors.onSurfaceVariant),
+                              const SizedBox(width: 6),
+                              Text('Professor', style: AppTextStyles.labelMd.copyWith(color: _selectedRole == 'prof' ? AppColors.primary : AppColors.onSurfaceVariant, fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('E-mail Institucional ou Matrícula', style: AppTextStyles.labelMd),
+                    const SizedBox(height: 6),
+                    TextFormField(
+                      controller: _identifierController,
+                      decoration: const InputDecoration(prefixIcon: Icon(Icons.badge_outlined)),
+                      validator: (v) => v == null || v.isEmpty ? 'Informe seu login' : null,
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Senha de Acesso', style: AppTextStyles.labelMd),
+                        GestureDetector(
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ForgotPasswordScreen())),
+                          child: Text('Esqueceu a senha?', style: AppTextStyles.labelSm.copyWith(color: AppColors.secondary, decoration: TextDecoration.underline)),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: _obscurePassword,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.lock_outline),
+                        suffixIcon: IconButton(
+                          icon: Icon(_obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                          onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                        ),
+                      ),
+                      validator: (v) => v == null || v.isEmpty ? 'Informe sua senha' : null,
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: _isLoading ? null : _handleLogin,
+                      child: _isLoading ? const CircularProgressIndicator(color: Colors.white) : const Text('Entrar no Sistema'),
+                    ),
+                    const SizedBox(height: 12),
+                    OutlinedButton.icon(
+                      onPressed: _triggerBiometrics,
+                      icon: const Icon(Icons.fingerprint, color: AppColors.secondary),
+                      label: const Text('Entrar com Biometria / Touch ID'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
