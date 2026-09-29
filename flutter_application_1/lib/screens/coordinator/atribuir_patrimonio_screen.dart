@@ -39,3 +39,41 @@ class _AtribuirPatrimonioScreenState extends State<AtribuirPatrimonioScreen> {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Termo de custódia homologado com sucesso!')));
     Navigator.pop(context);
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      appBar: AppBar(title: const Text('Atribuir Custódia'), backgroundColor: AppColors.surfaceContainerLowest),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.inventory_2, color: AppColors.primary),
+                title: Text(_patrimonioSel?.nome ?? 'Selecione o bem'),
+                subtitle: Text(_patrimonioSel?.codigo ?? ''),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.person, color: AppColors.secondary),
+                title: Text(_professorSel?.nome ?? 'Selecione o docente'),
+                subtitle: Text(_professorSel?.disciplina ?? ''),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white, minimumSize: const Size.fromHeight(50)),
+              onPressed: _confirmar,
+              icon: const Icon(Icons.assignment_turned_in),
+              label: const Text('Confirmar e Emitir Termo'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
