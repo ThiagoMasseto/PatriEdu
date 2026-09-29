@@ -45,3 +45,37 @@ class _NovoPatrimonioScreenState extends State<NovoPatrimonioScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Patrimônio ${novo.codigo} cadastrado!')));
     Navigator.pop(context);
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      appBar: AppBar(title: const Text('Novo Tombamento'), backgroundColor: AppColors.surfaceContainerLowest),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(controller: _tombamentoCtrl, decoration: const InputDecoration(labelText: 'Tombamento (Plaqueta)', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            TextField(controller: _nomeCtrl, decoration: const InputDecoration(labelText: 'Nome / Descrição', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            TextField(controller: _marcaCtrl, decoration: const InputDecoration(labelText: 'Marca', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            TextField(controller: _modeloCtrl, decoration: const InputDecoration(labelText: 'Modelo', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            TextField(controller: _serialCtrl, decoration: const InputDecoration(labelText: 'Número de Série (S/N)', border: OutlineInputBorder())),
+            const SizedBox(height: 12),
+            TextField(controller: _valorCtrl, keyboardType: TextInputType.number, decoration: const InputDecoration(labelText: 'Valor (R\$)', border: OutlineInputBorder())),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white, minimumSize: const Size.fromHeight(50)),
+              onPressed: _salvar,
+              icon: const Icon(Icons.save),
+              label: const Text('Cadastrar no Acervo'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
