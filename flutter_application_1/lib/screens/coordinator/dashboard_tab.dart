@@ -5,7 +5,6 @@ import '../../core/widgets/custom_app_bar.dart';
 import '../../controllers/patrimonio_controller.dart';
 import 'novo_patrimonio_screen.dart';
 import 'atribuir_patrimonio_screen.dart';
-import 'registrar_devolucao_screen.dart';
 
 class DashboardTab extends StatelessWidget {
   const DashboardTab({super.key});
@@ -17,9 +16,7 @@ class DashboardTab extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: const CustomAppBar(
-        userRole: 'Gestora',
-        title: 'PatriEdu',
-        subtitle: 'E.E. Cecília Meireles',
+        roleBadgeText: 'GESTORA',
       ),
       body: ListenableBuilder(
         listenable: controller,

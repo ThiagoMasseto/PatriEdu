@@ -142,6 +142,7 @@ class _RegisterCoordinatorScreenState extends State<RegisterCoordinatorScreen> {
                 ),
                 const SizedBox(height: 24),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
                   onPressed: _handleRegister,
                   child: const Text('Concluir Credenciamento'),
                 ),

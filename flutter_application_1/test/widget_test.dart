@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:patri_edu/main.dart';
+import 'package:flutter_application_1/main.dart';
 
 void main() {
   testWidgets('PatriEduApp smoke test', (WidgetTester tester) async {

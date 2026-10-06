@@ -55,7 +55,7 @@ class AppTheme {
             borderRadius: BorderRadius.circular(12),
           ),
           textStyle: AppTextStyles.labelLg,
-          minimumSize: const Size.fromHeight(48),
+          minimumSize: const Size(0, 48),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(

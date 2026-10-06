@@ -70,6 +70,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               if (_currentStep == 3) _buildStep3NewPassword(),
               const SizedBox(height: 24),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
                 onPressed: _isLoading ? null : _nextStep,
                 child: Text(_currentStep == 3 ? 'Concluir e Entrar' : 'Avançar'),
               ),

@@ -80,6 +80,8 @@ class _PatrimoniosTabState extends State<PatrimoniosTab> {
                   itemBuilder: (context, index) {
                     final item = itens[index];
                     return Card(
+                      color: AppColors.surfaceContainerLowest,
+                      elevation: 0.5,
                       margin: const EdgeInsets.only(bottom: 12),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       child: Padding(
@@ -110,15 +112,28 @@ class _PatrimoniosTabState extends State<PatrimoniosTab> {
                                   onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => PatrimonioHistoricoScreen(patrimonio: item))),
                                   child: const Text('Histórico'),
                                 ),
+                                const SizedBox(width: 8),
                                 if (item.status == StatusPatrimonio.emUso)
                                   ElevatedButton(
-                                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.surfaceContainer, foregroundColor: AppColors.primary),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.surfaceContainer,
+                                      foregroundColor: AppColors.primary,
+                                      elevation: 0,
+                                      minimumSize: const Size(0, 36),
+                                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                                    ),
                                     onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => RegistrarDevolucaoScreen(patrimonio: item))),
                                     child: const Text('Devolver'),
                                   ),
                                 if (item.status == StatusPatrimonio.disponivel)
                                   ElevatedButton(
-                                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.primary,
+                                      foregroundColor: Colors.white,
+                                      elevation: 0,
+                                      minimumSize: const Size(0, 36),
+                                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                                    ),
                                     onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AtribuirPatrimonioScreen(patrimonio: item))),
                                     child: const Text('Atribuir'),
                                   ),
