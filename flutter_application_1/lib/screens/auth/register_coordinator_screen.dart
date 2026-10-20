@@ -101,7 +101,7 @@ class _RegisterCoordinatorScreenState extends State<RegisterCoordinatorScreen> {
                 Text('Esfera Administrativa', style: AppTextStyles.labelMd),
                 const SizedBox(height: 6),
                 DropdownButtonFormField<String>(
-                  value: _selectedSphere,
+                  initialValue: _selectedSphere,
                   items: ['Estadual', 'Municipal', 'Federal', 'Privada']
                       .map((s) => DropdownMenuItem(value: s, child: Text(s)))
                       .toList(),

@@ -19,7 +19,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   bool _obscureNewPassword = true;
   bool _obscureConfirmPassword = true;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   void dispose() {

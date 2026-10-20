@@ -19,8 +19,8 @@ class _NovoPatrimonioScreenState extends State<NovoPatrimonioScreen> {
   final _nfCtrl = TextEditingController(text: 'NF-e 004.819');
   final _valorCtrl = TextEditingController(text: '3450.00');
 
-  CategoriaPatrimonio _categoria = CategoriaPatrimonio.informatica;
-  String _local = 'Sala de Informática (Lab 1)';
+  final CategoriaPatrimonio _categoria = CategoriaPatrimonio.informatica;
+  final String _local = 'Sala de Informática (Lab 1)';
 
   void _salvar() async {
     final novo = Patrimonio(

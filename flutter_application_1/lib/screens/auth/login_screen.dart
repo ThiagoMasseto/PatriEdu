@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String _selectedRole = 'coord';
   bool _obscurePassword = true;
-  bool _rememberMe = true;
+  final bool _rememberMe = true;
   bool _isLoading = false;
 
   @override
