@@ -21,6 +21,7 @@ class _NovoProfessorScreenState extends State<NovoProfessorScreen> {
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       matricula: _matriculaCtrl.text.trim(),
       nome: _nomeCtrl.text.trim(),
+      cpf: '***.492.818-**',
       email: _emailCtrl.text.trim(),
       disciplina: _disciplinaCtrl.text.trim(),
       telefone: '(85) 98765-4321',

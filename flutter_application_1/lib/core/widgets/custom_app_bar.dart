@@ -72,15 +72,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       height: 36,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
+                        color: AppColors.primaryContainer,
                         border: Border.all(
                           color: AppColors.surfaceContainerHigh,
                           width: 2,
                         ),
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
-                          ),
+                      ),
+                      child: ClipOval(
+                        child: Image.network(
+                          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
                           fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => const Icon(
+                            Icons.person,
+                            size: 20,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

@@ -28,12 +28,17 @@ class DocentesTab extends StatelessWidget {
         listenable: controller,
         builder: (context, _) {
           final professores = controller.professores;
+          if (professores.isEmpty) {
+            return const Center(child: Text('Nenhum docente cadastrado.'));
+          }
           return ListView.builder(
             padding: const EdgeInsets.all(16),
             itemCount: professores.length,
             itemBuilder: (context, index) {
               final prof = professores[index];
               return Card(
+                color: AppColors.surfaceContainerLowest,
+                elevation: 0.5,
                 margin: const EdgeInsets.only(bottom: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 child: Padding(
@@ -70,7 +75,13 @@ class DocentesTab extends StatelessWidget {
                             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.secondary),
                           ),
                           ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.surfaceContainer, foregroundColor: AppColors.primary),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.surfaceContainer,
+                              foregroundColor: AppColors.primary,
+                              elevation: 0,
+                              minimumSize: const Size(0, 36),
+                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                            ),
                             onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AtribuirPatrimonioScreen(professorPreSelecionado: prof))),
                             child: const Text('Atribuir Bem'),
                           ),

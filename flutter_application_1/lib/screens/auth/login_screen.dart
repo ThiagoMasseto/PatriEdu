@@ -6,7 +6,6 @@ import '../../controllers/auth_controller.dart';
 import '../coordinator/coordinator_main_screen.dart';
 import '../teacher/teacher_main_screen.dart';
 import 'forgot_password_screen.dart';
-import 'register_coordinator_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -210,15 +209,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (v) => v == null || v.isEmpty ? 'Informe sua senha' : null,
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _isLoading ? null : _handleLogin,
-                      child: _isLoading ? const CircularProgressIndicator(color: Colors.white) : const Text('Entrar no Sistema'),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
+                        onPressed: _isLoading ? null : _handleLogin,
+                        child: _isLoading ? const CircularProgressIndicator(color: Colors.white) : const Text('Entrar no Sistema'),
+                      ),
                     ),
                     const SizedBox(height: 12),
-                    OutlinedButton.icon(
-                      onPressed: _triggerBiometrics,
-                      icon: const Icon(Icons.fingerprint, color: AppColors.secondary),
-                      label: const Text('Entrar com Biometria / Touch ID'),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
+                        onPressed: _triggerBiometrics,
+                        icon: const Icon(Icons.fingerprint, color: AppColors.secondary),
+                        label: const Text('Entrar com Biometria / Touch ID'),
+                      ),
                     ),
                   ],
                 ),

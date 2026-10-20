@@ -16,9 +16,7 @@ class DashboardTab extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: const CustomAppBar(
-        userRole: 'Gestora',
-        title: 'PatriEdu',
-        subtitle: 'E.E. Cecília Meireles',
+        roleBadgeText: 'GESTORA',
       ),
       body: ListenableBuilder(
         listenable: controller,
